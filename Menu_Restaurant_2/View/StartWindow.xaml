@@ -1,0 +1,51 @@
+﻿<Window x:Class="Menu_Restaurant_2.View.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Menu_Restaurant_2.View"
+        xmlns:ViewModel="clr-namespace:Menu_Restaurant_2.ViewModel"
+        mc:Ignorable="d"
+        Title="Start Window" Height="600" Width="800" 
+        Background="{StaticResource BeigeBrush}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize">
+
+
+    <Window.DataContext>
+        <ViewModel:StartWindowVM/>
+    </Window.DataContext>
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <!-- Logo or Title -->
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" 
+                   FontSize="24" FontWeight="Bold" Foreground="{StaticResource DarkBrownBrush}" Margin="0,20,0,0">
+            Welcome to the Restaurant App
+        </TextBlock>
+
+        <!-- Log In Button -->
+        <Button Content="Log In" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Width="200" Height="40" Margin="0,124,0,0" 
+                Background="{StaticResource LightBrownBrush}" 
+                Foreground="White" BorderBrush="{StaticResource DarkBrownBrush}" 
+                BorderThickness="2" FontSize="16" FontWeight="Bold"
+                Command="{Binding LogInCommand}"/>
+
+        <!-- Sign Up Button -->
+        <Button Content="Sign Up" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Width="200" Height="40" Margin="0,120,0,0" 
+                Background="{StaticResource LightBrownBrush}" 
+                Foreground="White" BorderBrush="{StaticResource DarkBrownBrush}" 
+                BorderThickness="2" FontSize="16" FontWeight="Bold"
+                Command="{Binding SignUpCommand}"/>
+
+        <!-- Continue Without Account Button -->
+        <Button Content="Continue Without Account" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Width="262" Height="40" Margin="0,209,0,0" 
+                Background="{StaticResource DarkBrownBrush}" 
+                Foreground="White" BorderBrush="{StaticResource LightBrownBrush}" 
+                BorderThickness="2" FontSize="16" FontWeight="Bold"
+                Command="{Binding ContinueWithoutAccountCommand}"/>
+    </Grid>
+
+</Window>

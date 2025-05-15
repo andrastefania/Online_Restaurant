@@ -1,0 +1,75 @@
+﻿<Window x:Class="Menu_Restaurant_2.View.MenuPages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModel="clr-namespace:Menu_Restaurant_2.ViewModel"
+        xmlns:View="clr-namespace:Menu_Restaurant_2.View"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:localConverters="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+
+        
+    Title="Menu Page" Height="600" Width="800" 
+        Background="{StaticResource BeigeBrush}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Window.Resources>
+
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header bar -->
+            <RowDefinition Height="*"/>
+            <!-- Items grid -->
+        </Grid.RowDefinitions>
+
+        <!-- 🔍 Search, Filter, Sort -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,20">
+
+            <!-- Search -->
+            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+                <TextBlock Text="Search" FontWeight="Bold"/>
+                <TextBox x:Name="SearchBox" Width="200"
+                 Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <!-- Filter -->
+            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+                <TextBlock Text="Filter" FontWeight="Bold"/>
+                <ComboBox x:Name="FilterComboBox" Width="150" ItemsSource="{Binding FilterOptions}" 
+        SelectedItem="{Binding SelectedFilter, Mode=TwoWay}"/>
+            </StackPanel>
+
+            <!-- Order -->
+            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+                <TextBlock Text="Order by" FontWeight="Bold"/>
+                <ComboBox x:Name="SortComboBox" Width="150" ItemsSource="{Binding OrderOptions}" 
+        SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"/>
+            </StackPanel>
+
+        </StackPanel>
+
+
+        <!-- 📋 Items area -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding DisplayItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <View:FoodCard />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Content="👤" Margin="704,8,10,83" Width="40" Command="{Binding OpenProfileCommand}"/>
+        <Button Content="🛒" Margin="659,8,55,83" Width="40" Command="{Binding OpenOrderCommand}" Visibility="{Binding IsCustomer, Converter={StaticResource BoolToVisibility}}"/>
+    </Grid>
+</Window>
